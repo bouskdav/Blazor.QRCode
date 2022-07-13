@@ -1,0 +1,46 @@
+﻿@inject IQRCodeInterop QRCodeInterop
+@implements IAsyncDisposable
+
+<CascadingValue Value="this">
+    <div @ref="_qrCodeReference"></div>
+</CascadingValue>
+
+@code{
+    private ElementReference _qrCodeReference;
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public int Height { get; set; }
+
+    [Parameter]
+    public int Width { get; set; }
+
+    [Parameter]
+    public string ColorDark { get; set; }
+
+    [Parameter]
+    public string ColorLight { get; set; }
+
+    [Parameter]
+    public QRErrorCorrectLevel ErrororrectLevel { get; set; }
+
+    [Parameter]
+    public QRCodeOptions Options { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> ElementAttributes { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await QRCodeInterop.InitialiseAsync(_qrCodeReference, QRCodeOptions.FromComponent(this));
+        }
+    }
+
+    public ValueTask DisposeAsync() => QRCodeInterop.DestroyAsync(_qrCodeReference);
+
+    public ValueTask MakeCodeAsync(string text) => QRCodeInterop.MakeCodeAsync(_qrCodeReference, text);
+}

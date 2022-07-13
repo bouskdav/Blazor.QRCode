@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net5.0;net6.0;</TargetFrameworks>
+		<RazorLangVersion>3.0</RazorLangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<!--<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>-->
+		<!--<PackageLicenseFile>LICENSE</PackageLicenseFile>-->
+		<Version>3.1.0</Version>
+		<Description>A basic port for QRCode.js into Blazor.</Description>
+		<Copyright>David Bouska (2022)</Copyright>
+		<Authors>David Bouska</Authors>
+		<Company />
+		<!--<RepositoryUrl>https://github.com/JustinWilkinson/DataTables.Blazor</RepositoryUrl>-->
+		<PackageReleaseNotes>Basic support for JavaScript function callbacks.</PackageReleaseNotes>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1'">
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.6" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.13" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
+	</ItemGroup>
+
+</Project>

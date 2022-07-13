@@ -69,11 +69,17 @@ namespace Blazor.QRCodeJS.Interop
         }
 
         /// <inheritdoc/>
-        public ValueTask InitialiseAsync(ElementReference elementReference, QRCodeOptions options)
+        public async ValueTask InitialiseAsync(ElementReference elementReference, QRCodeOptions options)
         {
             var serializedOptions = JsonSerializer.Serialize(options, SerializerOptions);
 
-            return _runtime.InvokeVoidAsync("qrCodeInterop.initialiseQrCode", elementReference, serializedOptions);
+            if (options.Debug)
+            {
+                await _runtime.InvokeVoidAsync("console.log", $"Initialized Blazor.QRCodeJS with following options:");
+                await _runtime.InvokeVoidAsync("console.log", serializedOptions);
+            }
+
+            await _runtime.InvokeVoidAsync("qrCodeInterop.initialiseQrCode", elementReference, serializedOptions);
         }
 
         /// <inheritdoc/>

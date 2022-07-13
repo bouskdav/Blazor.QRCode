@@ -24,10 +24,13 @@
     public string ColorLight { get; set; }
 
     [Parameter]
-    public QRErrorCorrectLevel ErrororrectLevel { get; set; }
+    public QRErrorCorrectLevel ErrorCorrectLevel { get; set; }
 
     [Parameter]
     public QRCodeOptions Options { get; set; }
+
+    [Parameter]
+    public bool Debug { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> ElementAttributes { get; set; }
